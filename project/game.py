@@ -76,21 +76,6 @@ class Game:
             input("Press Enter to attack...")
             choice = input("Choice (1 - Normal attack, 2 - Special attack): ")
 
-            if choice == "1":
-                self.hero.attack(self.enemy)
-            elif choice == "2":
-              self.hero.special_attack(self.enemy)
-            else:
-                print("Invalid choice, try again")
-            
-            if self.enemy.get_health()>0:
-                self.enemy.attack(self.hero)
-          
-        if self.hero.get_health() > 0:
-          print("\n congratulations, you win the battle!")
-        else:
-          print("\n You lose HAHAHAH!")
-
-
+#Create a instance of Game and start battle
 game = Game()
 game.battle_start()
