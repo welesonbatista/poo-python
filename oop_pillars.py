@@ -52,3 +52,32 @@ print(f"The balance of your account is: ", {account.get_balance()})
 
 account.withdraw(888)
 print(f"The balance of your account is: ", {account.get_balance()})
+
+print("\n Abstract Exemple")
+
+from abc import ABC, abstractmethod
+
+class Vehicle(ABC):
+  
+  @abstractmethod
+  def start(self):
+    pass
+
+  @abstractmethod
+  def turn_off(self):
+    pass
+
+class Car (Vehicle):
+  def __init__(self)->None:
+    pass
+
+  def start(self):
+    return "The car starts using the key."
+  
+  def turn_off(self):
+    return "The car turn off using the key"
+  
+red_car = Car()
+print(red_car.start())
+print(red_car.turn_off())
+
