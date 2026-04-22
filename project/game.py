@@ -1,3 +1,5 @@
+import random
+
 class Character:
     def __init__(self, name, health, level):
         self.__name = name
@@ -17,7 +19,7 @@ class Character:
         return f"Name: {self.get_name()},\nHealth: {self.get_health()}\nLevel: {self.get_level()}"
 
     def attack(self, target):
-        damage = self.get_level() * 2
+        damage = random.randint(self.get_level()*2,self.get_level()*4)
         target.take_damage(damage)
         print(f"{self.get_name()} attacked {target.get_name()} and dealt {damage} damage")
     
@@ -39,7 +41,7 @@ class Hero(Character):
         return f"{super().get_details()}\nSkill: {self.get_skill()}\n"
 
     def special_attack(self, target):
-        damage = self.get_level()* 5
+        damage = random.randint(self.get_level()*5,self.get_level()*8)
         target.take_damage(damage)
         print(f"{self.get_name()} used the special skill {self.get_skill()} on {target.get_name()} and took {damage} damage")
 
