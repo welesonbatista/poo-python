@@ -16,6 +16,16 @@ class Character:
     def get_details(self):
         return f"Name: {self.get_name()},\nHealth: {self.get_health()}\nLevel: {self.get_level()}"
 
+    def attack(self, target):
+        damage = self.get_level() * 2
+        target.take_damage(damage)
+        print(f"{self.get_name()} attacked {target.get_name()} and dealt {damage} damage")
+    
+    def take_damage (self, damage):
+        self.__health -= damage
+        if self.__health <= 0:
+            self.__health = 0
+
 
 class Hero(Character):
     def __init__(self, name, health, level, skill):
@@ -27,6 +37,13 @@ class Hero(Character):
 
     def get_details(self):
         return f"{super().get_details()}\nSkill: {self.get_skill()}\n"
+
+    def special_attack(self, target):
+        damage = self.get_level()* 5
+        target.take_damage(damage)
+        print(f"{self.get_name()} used the special skill {self.get_skill()} on {target.get_name()} and took {damage} damage")
+
+        
 
 
 class Enemy(Character):
@@ -45,7 +62,7 @@ class Game:
     """Game management class"""
 
     def __init__(self):
-        self.hero = Hero(name="Hero", health=100, level=5, skill="Super Power")
+        self.hero = Hero(name="Hero", health=100, level=30, skill="Super Power")
         self.enemy = Enemy(name="Enemy", health=300, level=20, enemy_type="Flying")
 
     def battle_start(self):
@@ -59,6 +76,21 @@ class Game:
             input("Press Enter to attack...")
             choice = input("Choice (1 - Normal attack, 2 - Special attack): ")
 
-#Create a instance of Game and start battle
+            if choice == "1":
+                self.hero.attack(self.enemy)
+            elif choice == "2":
+              self.hero.special_attack(self.enemy)
+            else:
+                print("Invalid choice, try again")
+            
+            if self.enemy.get_health()>0:
+                self.enemy.attack(self.hero)
+          
+        if self.hero.get_health() > 0:
+          print("\n congratulations, you win the battle!")
+        else:
+          print("\n You lose HAHAHAH!")
+
+
 game = Game()
 game.battle_start()
